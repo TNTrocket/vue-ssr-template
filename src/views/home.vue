@@ -1,5 +1,7 @@
 <template>
-  <div>homefef {{item.id}}</div>
+  <div>homefef {{item.id}}
+    <div @click="gotoOne">123</div>
+  </div>
 </template>
 <script>
  const initFetchData = ({ store }) => {
@@ -15,10 +17,15 @@ export default {
     }
   },
   created() {
-    console.log('created=========')
+    console.log('created=========', this.item)
   },
   mounted() {
-    console.log('mounted=========')
+    console.log('mounted=========', this.item)
+  },
+  methods:{
+    gotoOne(){
+      window.location.href="/one"
+    }
   }
 }
 </script>

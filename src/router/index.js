@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import home from '../views/home.vue'
 
-// let home = import('../views/home.vue')
 Vue.use(Router)
 
 export function initRouter () {
@@ -11,7 +9,11 @@ export function initRouter () {
     routes: [
       {
           path:'/index',
-          component: home
+          component: ()=>import('../views/home.vue')
+      },
+      {
+        path:'/one',
+        component: ()=>import('../views/one.vue')
       }
     ]
   })

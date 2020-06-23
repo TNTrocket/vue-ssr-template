@@ -7,6 +7,7 @@ const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
 
 module.exports = merge(base, {
     target: "node",
+    mode: 'production',
     entry: path.resolve(__dirname, "./entry-server.js"),
     output: {
         path: path.resolve(__dirname, "../dist"),

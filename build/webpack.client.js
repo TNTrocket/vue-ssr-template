@@ -6,6 +6,7 @@ const webpack = require('webpack')
 const VueSSRClientPlugin = require("vue-server-renderer/client-plugin");
 
 const config = merge(base, {
+  mode: 'production',
   entry: {
     client: path.resolve(__dirname, "./entry-client.js")
   },

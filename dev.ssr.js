@@ -34,7 +34,7 @@ serverCompiler.watch({}, (err, stats) => {
 })
 // 处理请求
 const handleRequest = async ctx => {
-    console.log('path', ctx.path)
+    console.log('path====', ctx.path)
     if (!bundle) {
         ctx.body = '等待webpack打包完成后在访问在访问'
         return
@@ -42,12 +42,12 @@ const handleRequest = async ctx => {
     // 4、获取最新的 vue-ssr-client-manifest.json
     const clientManifestResp = await axios.get('http://localhost:8080/vue-ssr-client-manifest.json')
     const clientManifest = clientManifestResp.data
-    console.log('clientManifest=========', clientManifest)
     const renderer = createBundleRenderer(bundle, {
         runInNewContext: false,
         template: fs.readFileSync(path.resolve(__dirname, "./public/index.ssr.html"), "utf-8"),
         clientManifest: clientManifest
     });
+    // console.log('renderer', renderer)
     const html = await renderToString(ctx, renderer)
     ctx.body = html;
 }
@@ -55,12 +55,14 @@ const handleRequest = async ctx => {
 function renderToString(context, renderer) {
     return new Promise((resolve, reject) => {
         renderer.renderToString(context, (err, html) => {
+            console.log('err', err)
             err ? reject(err) : resolve(html);
         });
     });
 }
 const router = new Router()
-router.get("/index", handleRequest);
+router.get("*", handleRequest);
+// router.get("/one", handleRequest);
 const app = new Koa()
 // 开放目录
 app.use(serve(path.resolve(__dirname, './dist')));
