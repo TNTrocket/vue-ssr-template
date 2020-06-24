@@ -1,6 +1,6 @@
 <template>
   <div>homefef {{item.id}}
-    <div @click="gotoOne">123</div>
+    <div @click="gotoOne">goto one</div>
   </div>
 </template>
 <script>
@@ -24,7 +24,8 @@ export default {
   },
   methods:{
     gotoOne(){
-      window.location.href="/one"
+      // window.location.href="/one"
+      this.$router.push('/one')
     }
   }
 }
